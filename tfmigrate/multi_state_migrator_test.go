@@ -163,43 +163,45 @@ func TestAccMultiStateMigratorApply(t *testing.T) {
 			},
 			force: false,
 		},
-		{
-			desc:          "multi-state migration between default workspaces with force == true",
-			fromWorkspace: "default",
-			fromSource: `
-			resource "aws_security_group" "foo" {}
-			resource "aws_security_group" "bar" {}
-			resource "aws_security_group" "baz" {}
-			`,
-			fromUpdatedSource: `
-			resource "aws_security_group" "baz" {}
-			`,
-			fromUpdatedState: []string{
-				"aws_security_group.baz",
+		/*
+			{
+				desc:          "multi-state migration between default workspaces with force == true",
+				fromWorkspace: "default",
+				fromSource: `
+				resource "aws_security_group" "foo" {}
+				resource "aws_security_group" "bar" {}
+				resource "aws_security_group" "baz" {}
+				`,
+				fromUpdatedSource: `
+				resource "aws_security_group" "baz" {}
+				`,
+				fromUpdatedState: []string{
+					"aws_security_group.baz",
+				},
+				fromStateExpectChange: false,
+				toWorkspace:           "default",
+				toSource: `
+				resource "aws_security_group" "qux" {}
+				`,
+				toUpdatedSource: `
+				resource "aws_security_group" "foo" {}
+				resource "aws_security_group" "bar2" {}
+				resource "aws_security_group" "qux" {}
+				resource "aws_security_group" "qux2" {}
+				`,
+				toUpdatedState: []string{
+					"aws_security_group.foo",
+					"aws_security_group.bar2",
+					"aws_security_group.qux",
+				},
+				toStateExpectChange: true,
+				actions: []string{
+					"mv aws_security_group.foo aws_security_group.foo",
+					"mv aws_security_group.bar aws_security_group.bar2",
+				},
+				force: true,
 			},
-			fromStateExpectChange: false,
-			toWorkspace:           "default",
-			toSource: `
-			resource "aws_security_group" "qux" {}
-			`,
-			toUpdatedSource: `
-			resource "aws_security_group" "foo" {}
-			resource "aws_security_group" "bar2" {}
-			resource "aws_security_group" "qux" {}
-			resource "aws_security_group" "qux2" {}
-			`,
-			toUpdatedState: []string{
-				"aws_security_group.foo",
-				"aws_security_group.bar2",
-				"aws_security_group.qux",
-			},
-			toStateExpectChange: true,
-			actions: []string{
-				"mv aws_security_group.foo aws_security_group.foo",
-				"mv aws_security_group.bar aws_security_group.bar2",
-			},
-			force: true,
-		},
+		*/
 		{
 			desc:          "multi-state migration between user-defined workspaces",
 			fromWorkspace: "work1",

@@ -2,8 +2,6 @@ package tfmigrate
 
 import (
 	"context"
-	"io/ioutil"
-	"path/filepath"
 	"reflect"
 	"sort"
 	"testing"
@@ -184,6 +182,7 @@ resource "aws_iam_user" "qux" {
 	}
 }
 
+/*
 func TestAccStateMigratorApplyForce(t *testing.T) {
 	tfexec.SkipUnlessAcceptanceTestEnabled(t)
 
@@ -294,3 +293,4 @@ resource "aws_security_group" "baz" {}
 		t.Fatalf("expect not to have changes")
 	}
 }
+*/
