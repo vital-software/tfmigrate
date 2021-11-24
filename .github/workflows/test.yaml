@@ -39,8 +39,8 @@ jobs:
     strategy:
       matrix:
         terraform:
-        - 1.1.0-beta1
-        - 1.0.10
+        - 1.1.0-beta2
+        - 1.0.11
         - 0.15.5
         - 0.14.11
         - 0.13.7
